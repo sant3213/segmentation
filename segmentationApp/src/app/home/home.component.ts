@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {MAT_FORM_FIELD, MatFormField, MatFormFieldControl} from '@angular/material/form-field';
-import { Params } from '@angular/router';
-import { params } from '../model/params';
+import { SegmentService } from '../services/segment.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,7 +9,7 @@ import { params } from '../model/params';
 })
 export class HomeComponent implements OnInit {
   paramsForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private segmentService: SegmentService) { }
 
   ngOnInit(): void {
     this.paramsForm = this.fb.group({
@@ -24,10 +23,14 @@ export class HomeComponent implements OnInit {
       base1: [''],
       numaddrs: [''],
     });
-
   }
 
   sendParams(){
+    this.setParamsValues();
+    this.segmentService.sendParams(this.paramsForm);
+  }
+
+  sendDefaultParams(){
     this.paramsForm.setValue({
       seed: this.paramsForm.get('seed').value,
       asize: "1k",
@@ -39,17 +42,20 @@ export class HomeComponent implements OnInit {
       base1: "-1",
       numaddrs: 5
     });
-    console.log(this.paramsForm.value)
-    console.log(this.paramsForm.get('seed').value);
-    //this.sendParams(this.paramsForm);
-    //console.log("valor"+value);
   }
 
-  setParamsValues(paramsForm: FormGroup) {
+  setParamsValues() {
     this.paramsForm.setValue({
-      seed: this.paramsForm.get('seed').value
+      seed: this.paramsForm.get('seed').value,
+      asize: this.paramsForm.get('asize').value,
+      psize: this.paramsForm.get('psize').value,
+      address: this.paramsForm.get('address').value,
+      len0: this.paramsForm.get('len0').value,
+      len1: this.paramsForm.get('len1').value,
+      base0: this.paramsForm.get('base0').value,
+      base1: this.paramsForm.get('base1').value,
+      numaddrs: this.paramsForm.get('numaddrs').value
     });
-    console.log(this.paramsForm.value)
 }
 
 

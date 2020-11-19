@@ -8,6 +8,7 @@ import math
 # to make Python2 and Python3 act the same -- how dumb
 
 def exec_segmentation(res):
+    print("Desde code---->"+res.get('seed'))
     def random_seed(seed):
         try:
             random.seed(seed, version=1)
@@ -39,8 +40,8 @@ def exec_segmentation(res):
 
     random_seed(0)
     '''
-    asize = convert(res["asize"])
-    psize = convert(res["psize"])
+    asize = convert(res.get('asize'])
+    psize = convert(res.get('psize'))
     '''
     asize = convert("1k")
     psize = convert("16k")
@@ -58,10 +59,6 @@ def exec_segmentation(res):
     #
     # need to generate base, bounds for segment registers
     #
-    if res.get('len') != None:
-        print('si está')
-    else:
-        print('NO está')
 
     if res.get('asize') != None:
         print(res.get('asize'))
