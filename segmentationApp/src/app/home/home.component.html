@@ -1,0 +1,56 @@
+<div class="params-card">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <mat-card class="mat-card-params">
+                    <form (ngSubmit)="sendParams()" [formGroup]="paramsForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Seed</label>
+                                <input type="text" formControlName="seed" class="form-control" placeholder="Seed">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('seed').errors?.required">
+                                        Por favor ingrese un titulo
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="button-center col">
+                            <button class="btn btn-light new"
+                                [title]="paramsForm.valid ? 'Envia!' : 'Por favor ingresa todos los datos'"
+                                [disabled]="!paramsForm.valid" routerLinkActive="router-link-active">
+                                Enviar parámetros por defecto<i class="fas fa-plus-circle fa-1x" style="color: blue"></i>
+                            </button>
+                        </div>
+                    </form>
+                </mat-card>
+            </div>
+            <div class="col-sm">
+                <mat-card class="mat-card-params">
+                    <form (ngSubmit)="sendParams()" [formGroup]="paramsForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Seed</label>
+                                <input type="text" formControlName="seed" class="form-control" placeholder="Seed">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('seed').errors?.required">
+                                        Por favor ingrese un titulo
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="button-center col">
+                            <button class="btn btn-light new"
+                                [title]="paramsForm.valid ? 'Envia!' : 'Por favor ingresa todos los datos'"
+                                [disabled]="!paramsForm.valid" routerLinkActive="router-link-active">
+                                Crear<i class="fas fa-plus-circle fa-1x" style="color: blue"></i>
+                            </button>
+                        </div>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</div>
+<hr style="border-top: 1px solid #eee;">
