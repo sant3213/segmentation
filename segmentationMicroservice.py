@@ -26,7 +26,7 @@ def qs():
     res = segment.exec_segmentation(params)
     result = schema.dump(res)
     response = make_response(result, 200)
-    return response0
+    return response
 
 if __name__ == "__main__":
     print("Server running in port %s"%(PORT))
