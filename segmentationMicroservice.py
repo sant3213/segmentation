@@ -10,6 +10,7 @@ from wsgiref.simple_server import make_server
 from urllib.parse import parse_qs
 from flask import Flask, render_template, make_response, jsonify, request, json
 from flask_cors import CORS
+from data import Data
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -21,12 +22,11 @@ PORT = 3200
 def qs():
     print(request.data)
     params = json.loads(request.data)
-    segment.exec_segmentation(params)
-    res = make_response(jsonify(params), 200)
-    
-
-    #res = make_response(jsonify({"error": "No Query String"}), 404)
-    return res
+    schema = Data()
+    res = segment.exec_segmentation(params)
+    result = schema.dump(res)
+    response = make_response(result, 200)
+    return response0
 
 if __name__ == "__main__":
     print("Server running in port %s"%(PORT))

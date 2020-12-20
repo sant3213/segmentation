@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Params } from '@angular/router';
+import { UserParameters } from '../model/UserParameters';
 import { SegmentService } from '../services/segment.service';
 
 @Component({
@@ -11,6 +13,7 @@ export class HomeComponent implements OnInit {
   paramsForm: FormGroup;
   constructor(private fb: FormBuilder, private segmentService: SegmentService) { }
 
+  params:any;
   ngOnInit(): void {
     this.paramsForm = this.fb.group({
       seed: [""],
@@ -27,7 +30,10 @@ export class HomeComponent implements OnInit {
 
   sendParams(){
     this.setParamsValues();
-    this.segmentService.sendParams(this.paramsForm);
+    this.segmentService.sendParams(this.paramsForm).subscribe((data)=>{
+      this.params =data;
+      console.log(this.params.base0);
+    });
   }
 
   sendDefaultParams(){

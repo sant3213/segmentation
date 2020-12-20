@@ -22,7 +22,7 @@ export class SegmentService {
 
   sendParams(parameters: Params) {
     var params = JSON.stringify(parameters.value);
-    return this.httpClient.post('http://localhost:3200/segmentation', params, this.httpOptions).subscribe();// pipe(map((res: Response) => console.log("Response-->"+res)));
+    return this.httpClient.post('http://localhost:3200/segmentation', params, this.httpOptions);// pipe(map((res: Response) => console.log("Response-->"+res)));
   }
 
 }

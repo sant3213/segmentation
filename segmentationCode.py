@@ -4,11 +4,10 @@ import sys
 from optparse import OptionParser
 import random
 import math
-
+from data import Data
 # to make Python2 and Python3 act the same -- how dumb
 
 def exec_segmentation(res):
-    print("Desde code---->"+res.get('seed'))
     def random_seed(seed):
         try:
             random.seed(seed, version=1)
@@ -111,10 +110,14 @@ def exec_segmentation(res):
 
     print('Segment register information:')
     print('')
+    Data.base0='Segment 0 base  (grows positive) : 0x%08x (decimal %d)' % (base0, base0)
     print('  Segment 0 base  (grows positive) : 0x%08x (decimal %d)' % (base0, base0))
+    Data.len0='  Segment 0 limit                  : %d' % (len0)
     print('  Segment 0 limit                  : %d' % (len0))
     print('')
+    Data.base1 ='  Segment 1 base  (grows negative) : 0x%08x (decimal %d)' % (base1+len1, base1+len1)
     print('  Segment 1 base  (grows negative) : 0x%08x (decimal %d)' % (base1+len1, base1+len1))
+    Data.len1='  Segment 1 limit                  : %d' % (len1)
     print('  Segment 1 limit                  : %d' % (len1))
     print('')
 
@@ -163,12 +166,14 @@ def exec_segmentation(res):
         i += 1
 
     if False == False: # Agregar solve parámetro "-c"
-        print('For each virtual address, either write down the physical address it translates to')
+      '''  print('For each virtual address, either write down the physical address it translates to')
         print('OR write down that it is an out-of-bounds address (a segmentation violation). For')
         print('this problem, you should assume a simple address space with two segments: the top')
         print('bit of the virtual address can thus be used to check whether the virtual address')
         print('is in segment 0 (topbit=0) or segment 1 (topbit=1). Note that the base/limit pairs')
         print('given to you grow in different directions, depending on the segment, i.e., segment 0')
         print('grows in the positive direction, whereas segment 1 in the negative. ')
-        print('')
+        print('')'''
+
+    return Data
 

@@ -1,4 +1,4 @@
-export class params {
+export class UserParameters {
     seed: string;
     asize?: string;
     psize?: string;
