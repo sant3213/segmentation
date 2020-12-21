@@ -1,4 +1,6 @@
+import { SplitInterpolation } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-graphic-results',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraphicResultsComponent implements OnInit {
 
-  constructor() { }
+  data: any;
+  info: any;
+  constructor(private router: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.router.queryParams.subscribe((params) => {
+      this.info = params
+    });
+    console.log(this.info)
   }
 
 }

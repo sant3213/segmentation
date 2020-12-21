@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SegmentService } from '../services/segment.service';
 
 @Component({
@@ -10,7 +11,9 @@ import { SegmentService } from '../services/segment.service';
 export class FormComponent implements OnInit {
 
   paramsForm: FormGroup;
-  constructor(private service: SegmentService, private fb:FormBuilder) { }
+  constructor(private service: SegmentService, 
+    private fb:FormBuilder,
+    private router: Router) { }
 
   params:any;
 
@@ -34,6 +37,7 @@ export class FormComponent implements OnInit {
       this.params =data;
       console.log(this.params);
     });
+    this.router.navigate(['graphic-result'], {queryParams:{data:this.params}})
   }
 
   setParamsValues() {

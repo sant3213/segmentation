@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SegmentService } from '../services/segment.service';
 
 @Component({
@@ -12,7 +13,9 @@ export class HomeComponent implements OnInit {
   params: any;
   isInputParam: Boolean = false;
 
-  constructor(private fb: FormBuilder, private segmentService: SegmentService) { }
+  constructor(private fb: FormBuilder,
+    private segmentService: SegmentService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.paramsForm = this.fb.group({
@@ -62,6 +65,10 @@ export class HomeComponent implements OnInit {
       base0: '-1',
       base1: '-1',
       numaddrs: 0,
+    });
+    this.segmentService.sendParams(this.paramsForm).subscribe((data) => {
+      this.params = data;
+      this.router.navigate(['graphic-result'], { queryParams: this.params })
     });
   }
 
