@@ -9,10 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FormComponent } from './form/form.component';
+import { GraphicResultsComponent } from './graphic-results/graphic-results.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    FormComponent,
+    GraphicResultsComponent
   ],
   imports: [
     BrowserModule,

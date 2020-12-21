@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SegmentService } from '../services/segment.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
-export class HomeComponent implements OnInit {
-  paramsForm: FormGroup;
-  params: any;
-  isInputParam: Boolean = false;
+export class FormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private segmentService: SegmentService) { }
+  paramsForm: FormGroup;
+  constructor(private service: SegmentService, private fb:FormBuilder) { }
+
+  params:any;
 
   ngOnInit(): void {
     this.paramsForm = this.fb.group({
@@ -28,10 +28,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  sendParams() {
+  sendParams(){
     this.setParamsValues();
-    this.segmentService.sendParams(this.paramsForm).subscribe((data) => {
-      this.params = data;
+    this.service.sendParams(this.paramsForm).subscribe((data)=>{
+      this.params =data;
       console.log(this.params);
     });
   }
@@ -48,31 +48,24 @@ export class HomeComponent implements OnInit {
       base1: this.paramsForm.get('base1').value,
       numaddrs: this.paramsForm.get('numaddrs').value
     });
-  }
+}
 
-  setDefaultValues() {
-    this.isInputParam = false;
-    this.paramsForm.patchValue({
-      seed: 0,
-      asize: '1k',
-      psize: '16k',
-      address: '-1',
-      len0: '-1',
-      len1: '-1',
-      base0: '-1',
-      base1: '-1',
-      numaddrs: 0,
-    });
-  }
+setDefaultValues(){
+  this.paramsForm.patchValue({
+   seed: 0,
+   asize: '1k',
+   psize: '16k',
+   address: '-1',
+   len0: '-1',
+   len1: '-1',
+   base0: '-1',
+   base1: '-1',
+   numaddrs: 0,
+ });
+ }
 
-  showParamsForm() {
-    this.isInputParam = true;
-  }
-
-
-  resetValues() {
-    this.paramsForm.reset()
-  }
-
+resetValues(){
+  this.paramsForm.reset()
+}
 
 }

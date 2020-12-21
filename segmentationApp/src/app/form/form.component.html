@@ -1,0 +1,113 @@
+<div class="params-card">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <mat-card class="mat-card-params">
+                    <form (ngSubmit)="sendParams()" [formGroup]="paramsForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Seed</label>
+                                <input type="number" formControlName="seed" class="form-control" placeholder="Seed">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('seed').errors?.required">
+                                        Por favor ingrese el seed
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Memoria lógica</label>
+                                <input type="text" formControlName="asize" class="form-control"
+                                    placeholder="Memoria lógica">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('asize').errors?.required">
+                                        Por favor ingrese el tamaño de direccionamiento lógico
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Memoria física</label>
+                                <input type="text" formControlName="psize" class="form-control"
+                                    placeholder="Memoria física">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('psize').errors?.required">
+                                        Por favor ingrese el tamaño de memoria física
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Registro base de la memoria física</label>
+                                <input type="text" formControlName="base1" class="form-control" placeholder="Seed">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('base1').errors?.required">
+                                        Por favor ingrese un registro
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Tamaño de dirección virtual</label>
+                                <input type="text" formControlName="len0" class="form-control" placeholder="Seed">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('len0').errors?.required">
+                                        Por favor ingrese un tamaño
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Tamaño de la dirección física</label>
+                                <input type="text" formControlName="len1" class="form-control" placeholder="Seed">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('len1').errors?.required">
+                                        Por favor ingrese un tamaño
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Registro base de la dirección virtual</label>
+                                <input type="text" formControlName="base0" class="form-control" placeholder="Seed">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('base0').errors?.required">
+                                        Por favor ingrese un registro
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Direcciones</label>
+                                <input type="text" formControlName="address" class="form-control"
+                                    placeholder="Memoria física">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('address').errors?.required">
+                                        Por favor ingrese el tamaño de memoria física
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Cantidad de direcciones virtuales a generar</label>
+                                <input type="number" formControlName="numaddrs" class="form-control" placeholder="Seed">
+                                <span class="invalid-feedback">
+                                    <span *ngIf="paramsForm.get('numaddrs').errors?.required">
+                                        Por favor ingrese una cantidad de direcciones
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-light new"  type="submit" 
+                                    [title]="paramsForm.valid ? 'Envia!' : 'Por favor ingresa todos los datos'"
+                                    [disabled]="!paramsForm.valid" routerLinkActive="router-link-active">
+                                    Enviar<i class="fas fa-plus-circle fa-1x" style="color: blue"></i>
+                                </button>
+                            </div>
+                            <div class="col-md-4 offset-md-4">
+                                <button class="btn btn-light new" (click)="resetValues()">
+                                    Limpiar valores<i class="fas fa-plus-circle fa-1x" style="color: blue"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</div>
