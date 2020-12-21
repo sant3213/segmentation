@@ -8,4 +8,5 @@ export class UserParameters {
     base0?: string;
     base1?: string;
     numaddrs?: number;
+    virtualAddressTrace?:[]
 }

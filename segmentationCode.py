@@ -5,9 +5,17 @@ from optparse import OptionParser
 import random
 import math
 from data import Data
+from data import Addressess
+from data import Base0
+from data import Base1
 # to make Python2 and Python3 act the same -- how dumb
 
 def exec_segmentation(res):
+    result = Data()
+    base0Object = Data()
+    base1Object = Data()
+    addressTrace = Addressess()
+    addressTraceList =[]
     def random_seed(seed):
         try:
             random.seed(seed, version=1)
@@ -45,10 +53,10 @@ def exec_segmentation(res):
     asize = convert("1k")
     psize = convert("16k")
     addresses = str("-1")
-    print('ARG seed', 0)
-    print('ARG address space size', asize)
-    print('ARG phys mem size', psize)
-    print('')
+   #print('ARG seed', 0)
+    #print('ARG address space size', asize)
+    #print('ARG phys mem size', psize)
+    #print('')
 
 
     abort_if(psize <= 4, 'must specify a bigger physical memory size')
@@ -110,14 +118,18 @@ def exec_segmentation(res):
 
     print('Segment register information:')
     print('')
-    Data.base0='Segment 0 base  (grows positive) : 0x%08x (decimal %d)' % (base0, base0)
+    base0Object.hexa='0x%08x' % (base0)
+    base0Object.decimal='%d' % (base0)
+    base0Object.isPositive='1'
     print('  Segment 0 base  (grows positive) : 0x%08x (decimal %d)' % (base0, base0))
-    Data.len0='  Segment 0 limit                  : %d' % (len0)
+    result.len0='%d' % (len0)
     print('  Segment 0 limit                  : %d' % (len0))
     print('')
-    Data.base1 ='  Segment 1 base  (grows negative) : 0x%08x (decimal %d)' % (base1+len1, base1+len1)
+    base1Object.hexa='0x%08x' % (base1+len1)
+    base1Object.decimal='%d' % (base1+len1)
+    base1Object.isPositive='0'
     print('  Segment 1 base  (grows negative) : 0x%08x (decimal %d)' % (base1+len1, base1+len1))
-    Data.len1='  Segment 1 limit                  : %d' % (len1)
+    result.len1='%d' % (len1)
     print('  Segment 1 limit                  : %d' % (len1))
     print('')
 
@@ -144,7 +156,7 @@ def exec_segmentation(res):
         if vaddr < 0 or vaddr >= asize:
             print('Error: virtual address %d cannot be generated in an address space of size %d' % (vaddr, asize))
             exit(1)
-        if False == False: # Agregar solve parámetro "-c"
+        if True == False: # Agregar solve parámetro "-c"
             print('  VA %2d: 0x%08x (decimal: %4d) --> PA or segmentation violation?' % (i, vaddr, vaddr))
         else:
             paddr = 0
@@ -153,15 +165,40 @@ def exec_segmentation(res):
                 #  [base1+len1]  [negative offset]
                 paddr = nbase1 + (vaddr - asize)
                 if paddr < base1:
+                    addressTrace.hexa= '0x%08x' % (vaddr)
+                    addressTrace.decimal= '%4d' % (vaddr)
+                    addressTrace.hexaValid = 'VIOLATION (SEG1)' 
+                    addressTrace.hexaValid = 'VIOLATION (SEG1)'
+                    addressTraceList.append(addressTrace)
+                    addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG1)' % (i, vaddr, vaddr))
                 else:
+                   # addressTrace.append('  VA %2d: 0x%08x (decimal: %4d) --> VALID in SEG1: 0x%08x (decimal: %4d)' % (i, vaddr, vaddr, paddr, paddr))
+                    addressTrace.hexa = '0x%08x' % (vaddr)
+                    addressTrace.decimal = '%4d' % (vaddr)
+                    addressTrace.hexaValid = '0x%08x'% (paddr)
+                    addressTrace.decimalValid = '%4d'% (paddr)
+                    addressTraceList.append(addressTrace)
+                    addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> VALID in SEG1: 0x%08x (decimal: %4d)' % (i, vaddr, vaddr, paddr, paddr))
             else:
                 # seg 0
                 if (vaddr >= len0):
+                   # addressTrace.append('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG0)' % (i, vaddr, vaddr))
+                    addressTrace.hexa= '0x%08x' % (vaddr)
+                    addressTrace.decimal= '%4d' % (vaddr)
+                    addressTrace.hexaValid = 'VIOLATION (SEG0)' 
+                    addressTrace.hexaValid = 'VIOLATION (SEG0)'
+                    addressTraceList.append(addressTrace)
+                    addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG0)' % (i, vaddr, vaddr))
                 else:
-                    paddr = vaddr + base0
+                    addressTrace.hexa = '0x%08x' % (vaddr)
+                    addressTrace.decimal = '%4d' % (vaddr)
+                    addressTrace.hexaValid = '0x%08x '% (paddr)
+                    addressTrace.decimalValid = '%4d'% (paddr)
+                    addressTraceList.append(addressTrace)
+                    addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> VALID in SEG0: 0x%08x (decimal: %4d)' % (i, vaddr, vaddr, paddr, paddr))
         i += 1
 
@@ -174,6 +211,8 @@ def exec_segmentation(res):
         print('given to you grow in different directions, depending on the segment, i.e., segment 0')
         print('grows in the positive direction, whereas segment 1 in the negative. ')
         print('')'''
-
-    return Data
+    result.base0 = base0Object
+    result.base1 = base1Object
+    result.virtualAddressTrace = addressTraceList
+    return result   
 

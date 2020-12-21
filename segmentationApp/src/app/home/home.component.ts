@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     this.setParamsValues();
     this.segmentService.sendParams(this.paramsForm).subscribe((data)=>{
       this.params =data;
-      console.log(this.params.base0);
+      console.log(this.params);
     });
   }
 
