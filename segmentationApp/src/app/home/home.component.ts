@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Addressess } from '../model/Addressess';
+import { Base0 } from '../model/Base0';
+import { Base1 } from '../model/Base1';
 import { SegmentService } from '../services/segment.service';
 
 @Component({
@@ -9,9 +12,14 @@ import { SegmentService } from '../services/segment.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   paramsForm: FormGroup;
   params: any;
   isInputParam: Boolean = false;
+  base0Object: Base0;
+  base1Object: Base1;
+  addressesObject: Addressess;
+  addressesList=[];
 
   constructor(private fb: FormBuilder,
     private segmentService: SegmentService,
@@ -35,7 +43,6 @@ export class HomeComponent implements OnInit {
     this.setParamsValues();
     this.segmentService.sendParams(this.paramsForm).subscribe((data) => {
       this.params = data;
-      console.log(this.params);
     });
   }
 
@@ -66,9 +73,14 @@ export class HomeComponent implements OnInit {
       base1: '-1',
       numaddrs: 0,
     });
+
     this.segmentService.sendParams(this.paramsForm).subscribe((data) => {
       this.params = data;
-      this.router.navigate(['graphic-result'], { queryParams: this.params })
+      this.setValues(data['base0'], data['base0']);
+      this.setAddresses(data['virtualAddressTrace']);
+      this.router.navigate(['graphic-result'], { queryParams: {base0: JSON.stringify(data['base0']), base1:JSON.stringify(['base1']),
+       addresses: JSON.stringify(data['virtualAddressTrace'])}})
+
     });
   }
 
@@ -81,5 +93,15 @@ export class HomeComponent implements OnInit {
     this.paramsForm.reset()
   }
 
+  setValues(base0Object, base1Object) {
+    this.base0Object = base0Object;
+    this.base1Object = base1Object;
+  }
 
+  setAddresses(addresses) {
+    addresses.forEach(element => {
+      this.addressesObject = element;
+      this.addressesList.push(this.addressesObject)
+    });
+  }
 }

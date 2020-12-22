@@ -1,20 +1,29 @@
 
  <mat-card class="mat-card" style="width: 2000;">
-     <table>
+     <table class="table">
     <thead>
       <tr>
-        <th scope="col">Segment 0</th>
+        <th scope="col">Segment</th>
+        <th scope="col">Hexadecimal</th>
+        <th scope="col">Decimal</th>
+        <th scope="col">Sentido</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody >
+      <tr >
+        <th scope="col">Segment 0</th>
+        <th scope="row" > {{base0Object.hexa}}</th>
+        <th scope="row" > {{base0Object.decimal}}</th>
+        <th scope="row" > {{base0Object.isPositive}}</th>
+      </tr>
       <tr >
         <th scope="row" class="unallocated" height="250">(Unallocated)</th>
       </tr>
       <tr>
-        <th scope="row">Segment 1</th>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
+        <th scope="row">Segment 1 (Stack)</th>
+        <th scope="row" > {{base1Object.hexa}}</th>
+        <th scope="row" > {{base1Object.decimal}}</th>
+        <th scope="row" > {{base1Object.isPositive}}</th>
       </tr>
     </tbody>
   </table>
