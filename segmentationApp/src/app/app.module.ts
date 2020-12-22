@@ -11,6 +11,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './form/form.component';
 import { GraphicResultsComponent } from './graphic-results/graphic-results.component';
+import {MatSelectModule} from '@angular/material/select';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,8 @@ import { GraphicResultsComponent } from './graphic-results/graphic-results.compo
     MatFormFieldModule,
     BrowserAnimationsModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

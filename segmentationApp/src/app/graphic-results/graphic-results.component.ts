@@ -4,6 +4,10 @@ import { Addressess } from '../model/Addressess';
 import { Base0 } from '../model/Base0';
 import { Base1 } from '../model/Base1';
 
+interface Base0Section {
+  selection: string;
+}
+
 @Component({
   selector: 'app-graphic-results',
   templateUrl: './graphic-results.component.html',
@@ -13,20 +17,36 @@ export class GraphicResultsComponent implements OnInit {
 
   data: any;
   info: any;
-  base0: Base0;
-  base1: Base1;
   addresses: Addressess;
   base0Object: Base0;
   base1Object: Base1;
   addressesObject: Addressess;
-  addressesList=[];
+  addressesList = [];
+  base0Value:String;
+  base1Value:String;
+  len0Value:string;
+  len1Value:string;
+
+  states: Base0Section[] = [
+    {
+      selection: 'Decimal'
+    }, {
+      selection: 'Hexadecimal'
+    }
+  ];
 
   constructor(private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.router.queryParams.subscribe((params) => {
-      this.setValues(JSON.parse(params['base0']), JSON.parse(params['base0']));
-      this.setAddresses(JSON.parse(params['addresses']));
+      this.info = JSON.parse(params.info)
+      console.log(this.info)
+      this.setValues(this.info.base0, this.info.base1);
+      this.setAddresses(this.info.virtualAddressTrace);
+      this.base0Value=this.base0Object.decimal;
+      this.base1Value=this.base1Object.decimal;
+      this.len0Value = this.info.len0;
+      this.len1Value = this.info.len1;
     });
   }
 
@@ -40,6 +60,25 @@ export class GraphicResultsComponent implements OnInit {
       this.addressesObject = element;
       this.addressesList.push(this.addressesObject)
     });
+  }
+
+  setBase0Variable(event){
+    switch(event.value){
+      case 'Decimal':{
+        this.base0Value=this.base0Object.decimal;
+        this.base1Value=this.base1Object.decimal;
+        this.len0Value = this.info.len0;
+        this.len1Value = this.info.len1;
+        break;
+      }
+      case 'Hexadecimal':{
+        this.base0Value=this.base0Object.hexa;
+        this.base1Value=this.base1Object.hexa;
+        this.len0Value = Number(this.info.len0).toString(16);
+        this.len1Value = Number(this.info.len1).toString(16);
+        break;
+      }
+    }
   }
 
 }

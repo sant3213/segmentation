@@ -1,14 +1,56 @@
 .table{
-    text-align: center;
-    width: 60%;
-    margin-top: 6%;
+  
 }
 
+.mat-card-result{
+   
 
-.mat-card{
-    margin-right: 50%;
 }
 
-.spacer{
-    margin-top:10px;margin-bottom:10px;
+.label-select{
+font-size: medium;
+font-weight: bold;
+}
+
+.general-label{
+    font-size: large;
+font-weight: bold;
+}
+.container{
+    margin-top: 5%;
+}
+
+.mat-form-field{
+    width: 10%;
+}
+@media only screen and (max-width: 1300px) {
+    .mat-card-result{
+        width: 30%;
+        
+        }
+
+        .table{
+            text-align: center;
+            width: 20%;
+            height: 15%;
+            margin-top: 6%;
+        }
+
+        .label-select{
+            font-size: smaller;
+            font-weight: bold;
+            }
+        .general-label{
+            font-size: smaller;
+        font-weight: bold;
+        }
+
+        .mat-form-field{
+            width: 10%;
+        }
+
+        .mat-select-placeholder{
+         font-size: 1;   
+        }
+
 }

@@ -76,10 +76,9 @@ export class HomeComponent implements OnInit {
 
     this.segmentService.sendParams(this.paramsForm).subscribe((data) => {
       this.params = data;
-      this.setValues(data['base0'], data['base0']);
+      this.setValues(data['base0'], data['base1']);
       this.setAddresses(data['virtualAddressTrace']);
-      this.router.navigate(['graphic-result'], { queryParams: {base0: JSON.stringify(data['base0']), base1:JSON.stringify(['base1']),
-       addresses: JSON.stringify(data['virtualAddressTrace'])}})
+      this.router.navigate(['graphic-result'], { queryParams: {info: JSON.stringify(data)}})
 
     });
   }
