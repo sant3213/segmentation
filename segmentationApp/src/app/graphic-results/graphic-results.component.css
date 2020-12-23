@@ -1,12 +1,3 @@
-.table{
-  
-}
-
-.mat-card-result{
-   
-
-}
-
 .label-select{
 font-size: medium;
 font-weight: bold;
@@ -22,35 +13,4 @@ font-weight: bold;
 
 .mat-form-field{
     width: 10%;
-}
-@media only screen and (max-width: 1300px) {
-    .mat-card-result{
-        width: 30%;
-        
-        }
-
-        .table{
-            text-align: center;
-            width: 20%;
-            height: 15%;
-            margin-top: 6%;
-        }
-
-        .label-select{
-            font-size: smaller;
-            font-weight: bold;
-            }
-        .general-label{
-            font-size: smaller;
-        font-weight: bold;
-        }
-
-        .mat-form-field{
-            width: 10%;
-        }
-
-        .mat-select-placeholder{
-         font-size: 1;   
-        }
-
 }

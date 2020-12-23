@@ -41,17 +41,19 @@ def exec_segmentation(res):
 
     def abort_if(condition, message):
         if condition:
+            result.error= message
             print('Error:', message)
-            exit(1)
+           # exit(1)
         return
 
     random_seed(0)
-    '''
-    asize = convert(res.get('asize'])
+    
+    asize = convert(res.get('asize'))
     psize = convert(res.get('psize'))
     '''
     asize = convert("1k")
     psize = convert("16k")
+    '''
     addresses = str("-1")
    #print('ARG seed', 0)
     #print('ARG address space size', asize)
@@ -59,9 +61,9 @@ def exec_segmentation(res):
     #print('')
 
 
-    abort_if(psize <= 4, 'must specify a bigger physical memory size')
-    abort_if(asize == 0, 'must specify a non-zero address-space size')
-    abort_if(psize <= asize, 'physical memory size > address space size (for this simulation)')
+    abort_if(psize <= 4, 'Debe especificar un tamaño de memoria física mas grande')
+    abort_if(asize == 0, 'Debe especificar un tamaño de espacio de direccionamiento distinto de cero')
+    abort_if(psize <= asize, 'El tamaño de memoria física es mayor al tamaño de espacio de direccionamiento')
 
     #
     # need to generate base, bounds for segment registers
@@ -69,7 +71,7 @@ def exec_segmentation(res):
 
     if res.get('asize') != None:
         print(res.get('asize'))
-    '''
+    
     len0 = convert(res.get('len0'))
     len1 = convert(res.get('len1'))
     base0 = convert(res.get('base0'))
@@ -79,7 +81,7 @@ def exec_segmentation(res):
     len1 = convert("-1")
     base0 = convert("-1")
     base1 = convert("-1")
-
+'''
     # if randomly generating length, make it 1/4-1/2 the address space size (roughly)
     if len0 == -1:
         len0 = int(asize/4.0 + (asize/4.0 * random.random()))
@@ -88,7 +90,7 @@ def exec_segmentation(res):
 
     if base0 == -1 or base1 == -1:
         # this restriction just makes it easier to place randomly-placed segments
-        abort_if(psize <= 2 * asize, 'physical memory must be 2x GREATER than address space size (if randomly generating base registers)')
+        abort_if(psize <= 2 * asize, 'La memoria física debe ser 2x más grande que el tamaño del espacio de direccionamiento (Si genera registros base aleatoriamente)')
 
     # if randomly generate base, have to find room for them
     if base0 == -1:
@@ -110,11 +112,11 @@ def exec_segmentation(res):
     else:
         base1 = base1 - len1
 
-    abort_if(psize < base0 + len0 - 1, 'seg0 is not in physical memory')
-    abort_if(psize < base1, 'seg1 is not in physical memory')
+    abort_if(psize < base0 + len0 - 1, 'Segmento 0 no está en la memoria física')
+    abort_if(psize < base1, 'Segmento 1 no está en la memoria física')
         
-    abort_if(len0 > asize/2.0, 'length0 register is too large for this address space')
-    abort_if(len1 > asize/2.0, 'length1 register is too large for this address space')
+    abort_if(len0 > asize/2.0, 'El registro de length0 es muy grande para este espacio de direccionamiento')
+    abort_if(len1 > asize/2.0, 'El registro de length1 es muy grande para este espacio de direccionamiento')
 
     print('Segment register information:')
     print('')
@@ -135,7 +137,7 @@ def exec_segmentation(res):
 
     nbase1 = base1 + len1
 
-    abort_if((len0 + base0) > base1 and (base1 > base0), 'segments overlap in physical memory')
+    abort_if((len0 + base0) > base1 and (base1 > base0), 'los segmentos se superponen en la memoria física')
 
     addrList = []
     if addresses == '-1':
@@ -154,6 +156,7 @@ def exec_segmentation(res):
     for vstr in addrList:
         vaddr = int(vstr)
         if vaddr < 0 or vaddr >= asize:
+            result.error = 'La dirección virtual %d no puede ser generada en un espacio de direccionamiento de tamaño %d' % (vaddr, asize) 
             print('Error: virtual address %d cannot be generated in an address space of size %d' % (vaddr, asize))
             exit(1)
         if True == False: # Agregar solve parámetro "-c"

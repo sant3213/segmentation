@@ -21,8 +21,11 @@ export class SegmentService {
   constructor(private httpClient: HttpClient) { }
 
   sendParams(parameters: Params) {
-    var params = JSON.stringify(parameters.value);
-    return this.httpClient.post('http://localhost:3200/segmentation', params, this.httpOptions);// pipe(map((res: Response) => console.log("Response-->"+res)));
+    var params;
+    if(parameters.value !=undefined)
+    params = JSON.stringify(parameters.value);
+    else params = parameters
+    return this.httpClient.post('http://localhost:3200/segmentation', params, this.httpOptions);
   }
 
 }

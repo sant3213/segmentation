@@ -2,6 +2,7 @@ from marshmallow import Schema, fields
 
 
 class Data(Schema):
+    error = fields.Str()
     seed = fields.Str()
     asize = fields.Str()
     psize = fields.Str()

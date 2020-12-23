@@ -15,4 +15,4 @@
         </div>
     </mat-card>
 </div>
-<app-form *ngIf="isInputParam"></app-form>
+<app-form *ngIf="isInputParam" (paramsInformation)="sendParams($event)"></app-form>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EventEmitter } from '@angular/core';
 import { SegmentService } from '../services/segment.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { SegmentService } from '../services/segment.service';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+
+@Output() paramsInformation = new EventEmitter();
 
   paramsForm: FormGroup;
   constructor(private service: SegmentService, 
@@ -31,13 +34,18 @@ export class FormComponent implements OnInit {
     });
   }
 
+  callParenGreeet(){
+    this.paramsInformation.emit(this.paramsForm.value);
+  }
+
   sendParams(){
     this.setParamsValues();
-    this.service.sendParams(this.paramsForm).subscribe((data)=>{
+    this.service.sendParams(this.paramsForm).subscribe(
+      (data)=>{
       this.params =data;
       console.log(this.params);
     });
-    this.router.navigate(['graphic-result'], {queryParams:{data:this.params}})
+    this.router.navigate(['graphic-result'], {queryParams:{data:JSON.stringify(this.params)}})
   }
 
   setParamsValues() {
@@ -53,20 +61,6 @@ export class FormComponent implements OnInit {
       numaddrs: this.paramsForm.get('numaddrs').value
     });
 }
-
-setDefaultValues(){
-  this.paramsForm.patchValue({
-   seed: 0,
-   asize: '1k',
-   psize: '16k',
-   address: '-1',
-   len0: '-1',
-   len1: '-1',
-   base0: '-1',
-   base1: '-1',
-   numaddrs: 0,
- });
- }
 
 resetValues(){
   this.paramsForm.reset()

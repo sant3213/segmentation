@@ -1,0 +1,17 @@
+.img-error{
+    width: 30%;
+    height: 50%;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+
+.txt-error{
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.center-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -20,19 +20,19 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="col" height="150" class="general-label">Base: {{base0Value}}</th>
-            <th class="general-label"> Segmento 0</th>
+            <th scope="col" height="150" class="general-label" style="color: blue;">Base: {{base0Value}}<img src="../../assets/arrow_downward-24px.svg"></th>
+            <th class="general-label"> Segmento 0 (Código y Heap)</th>
           </tr>
-          <strong class="general-label">Límite {{len0Value}}</strong>
+          <strong class="general-label" style="color: red;">Límite {{len0Value}}</strong>
           <tr>
             <th scope="row" class="unallocated" height="150" class="general-label">(Unallocated)</th>
             <th scope="row" class="unallocated" height="150" class="general-label"></th>
           </tr>
           <tr>
-            <th scope="row" height="150" class="general-label">Límite {{len1Value}}</th>
-            <th scope="row" class="general-label"> Segment 1 (Stack) </th>
+            <th scope="row" height="150" class="general-label" style="color: red;">Límite {{len1Value}}</th>
+            <th scope="row" class="general-label" > Segment 1 (Stack)</th>
           </tr>
-          <strong class="general-label">Base: {{base1Value}}</strong>
+          <strong class="general-label" style="color: blue;">Base: {{base1Value}} <img src="../../assets/arrow_up.svg"> </strong>
         </tbody>
       </table>
 

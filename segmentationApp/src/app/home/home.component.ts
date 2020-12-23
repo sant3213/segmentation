@@ -1,10 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Addressess } from '../model/Addressess';
 import { Base0 } from '../model/Base0';
 import { Base1 } from '../model/Base1';
 import { SegmentService } from '../services/segment.service';
+import { UserParameters } from '../../app/model/UserParameters';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { PopupComponent } from '../popup/popup.component';
+
+export interface DialogData {
+  error: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -19,11 +27,13 @@ export class HomeComponent implements OnInit {
   base0Object: Base0;
   base1Object: Base1;
   addressesObject: Addressess;
-  addressesList=[];
+  addressesList = [];
+  closeResult = '';
+  error: string;
 
   constructor(private fb: FormBuilder,
     private segmentService: SegmentService,
-    private router: Router) { }
+    private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.paramsForm = this.fb.group({
@@ -39,24 +49,29 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  sendParams() {
-    this.setParamsValues();
-    this.segmentService.sendParams(this.paramsForm).subscribe((data) => {
-      this.params = data;
+  sendParams(information: UserParameters) {
+
+    this.setParamsValues(information);
+    this.segmentService.sendParams(information).subscribe((data) => {
+      this.showData(data);
     });
   }
 
-  setParamsValues() {
+  greet(information: FormGroup) {
+    this.paramsForm = information;
+  }
+
+  setParamsValues(information: UserParameters) {
     this.paramsForm.setValue({
-      seed: this.paramsForm.get('seed').value,
-      asize: this.paramsForm.get('asize').value,
-      psize: this.paramsForm.get('psize').value,
-      address: this.paramsForm.get('address').value,
-      len0: this.paramsForm.get('len0').value,
-      len1: this.paramsForm.get('len1').value,
-      base0: this.paramsForm.get('base0').value,
-      base1: this.paramsForm.get('base1').value,
-      numaddrs: this.paramsForm.get('numaddrs').value
+      seed: information.seed,
+      asize: information.asize,
+      psize: information.psize,
+      address: information.address,
+      len0: information.len0,
+      len1: information.len1,
+      base0: information.base0,
+      base1: information.base1,
+      numaddrs: information.numaddrs
     });
   }
 
@@ -75,18 +90,27 @@ export class HomeComponent implements OnInit {
     });
 
     this.segmentService.sendParams(this.paramsForm).subscribe((data) => {
-      this.params = data;
+      this.showData(data);
+    });
+  }
+
+  showData(data) {
+    this.params = data;
+    if (data['error']) {
+      this.error = data['error'];
+      this.openDialog();
+     // console.log(data['error']);
+    } else {
       this.setValues(data['base0'], data['base1']);
       this.setAddresses(data['virtualAddressTrace']);
-      this.router.navigate(['graphic-result'], { queryParams: {info: JSON.stringify(data)}})
-
-    });
+      this.router.navigate(['graphic-result'], { queryParams: { info: JSON.stringify(data) } })
+      this.resetValues()
+    }
   }
 
   showParamsForm() {
     this.isInputParam = true;
   }
-
 
   resetValues() {
     this.paramsForm.reset()
@@ -103,4 +127,25 @@ export class HomeComponent implements OnInit {
       this.addressesList.push(this.addressesObject)
     });
   }
+
+  openPopup() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+    this.dialog.open(PopupComponent);
+  }
+
+  openDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '750px',
+      height: '350px',
+      disableClose: true,
+      data: {
+        error: this.error
+      }
+    });
+  }
 }
+

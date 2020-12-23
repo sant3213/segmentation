@@ -12,14 +12,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './form/form.component';
 import { GraphicResultsComponent } from './graphic-results/graphic-results.component';
 import {MatSelectModule} from '@angular/material/select';
-
+import { PopupComponent } from './popup/popup.component';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FormComponent,
-    GraphicResultsComponent
+    GraphicResultsComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserAnimationsModule,
     MatCardModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
