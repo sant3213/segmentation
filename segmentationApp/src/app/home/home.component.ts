@@ -9,9 +9,11 @@ import { SegmentService } from '../services/segment.service';
 import { UserParameters } from '../../app/model/UserParameters';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
+import { environment } from 'src/environments/environment';
 
 export interface DialogData {
-  error: string;
+  message: string;
+  logo:Boolean;
 }
 
 @Component({
@@ -30,6 +32,7 @@ export class HomeComponent implements OnInit {
   addressesList = [];
   closeResult = '';
   error: string;
+  helpGuidance= environment.helpGuidance;
 
   constructor(private fb: FormBuilder,
     private segmentService: SegmentService,
@@ -98,7 +101,7 @@ export class HomeComponent implements OnInit {
     this.params = data;
     if (data['error']) {
       this.error = data['error'];
-      this.openDialog();
+      this.openDialog(this.error, true);
      // console.log(data['error']);
     } else {
       this.setValues(data['base0'], data['base1']);
@@ -128,6 +131,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  showHelpInformation(){
+    this.openDialog(this.helpGuidance, false)
+  }
+
   openPopup() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -136,14 +143,15 @@ export class HomeComponent implements OnInit {
     this.dialog.open(PopupComponent);
   }
 
-  openDialog(): void {
+  openDialog(messageToShow, isError): void {
     const dialogConfig = new MatDialogConfig();
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '750px',
       height: '350px',
       disableClose: true,
       data: {
-        error: this.error
+        message: messageToShow,
+        logo: isError
       }
     });
   }

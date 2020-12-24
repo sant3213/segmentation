@@ -11,15 +11,17 @@ import { DialogData, HomeComponent } from '../home/home.component';
   styleUrls: ['./popup.component.css']
 })
 export class PopupComponent implements OnInit {
-  error: string;
-
+  message: string;
+  isError:Boolean;
   buttonDisabled= true;
+
   constructor(public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private route: ActivatedRoute, private _formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.error = this.data.error
+    this.message = this.data.message;
+    this.isError = this.data.logo;
   }
 
   save() {

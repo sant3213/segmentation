@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm">
                 <mat-card class="mat-card-params">
-                    <form (ngSubmit)="callParenGreeet()" [formGroup]="paramsForm">
+                    <form (ngSubmit)="sendData()" [formGroup]="paramsForm">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputName">Seed</label>
@@ -44,7 +44,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputName">Tamaño de dirección virtual</label>
+                                <label for="inputName">Límite segmento 0</label>
                                 <input type="text" formControlName="len0" class="form-control" placeholder="">
                                 <span class="invalid-feedback">
                                     <span *ngIf="paramsForm.get('len0').errors?.required">
@@ -53,7 +53,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputName">Tamaño de la dirección física</label>
+                                <label for="inputName">Límite del segmento 1</label>
                                 <input type="text" formControlName="len1" class="form-control" placeholder="">
                                 <span class="invalid-feedback">
                                     <span *ngIf="paramsForm.get('len1').errors?.required">

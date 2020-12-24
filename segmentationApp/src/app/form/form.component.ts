@@ -34,7 +34,7 @@ export class FormComponent implements OnInit {
     });
   }
 
-  callParenGreeet(){
+  sendData(){
     this.paramsInformation.emit(this.paramsForm.value);
   }
 

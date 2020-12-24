@@ -1,5 +1,6 @@
-<img class="img-error" src="../../assets/errorIcon.png">
-<p class="txt-error">{{error}}</p>
+<img *ngIf="isError" class="img-error" src="../../assets/errorIcon.png">
+<img *ngIf="!isError" class="img-error" src="../../assets/help-icon.png">
+<p class="txt-error">{{message}}</p>
 <div class="center-button">
         
     <button class="btn btn-light new"  (click)="save()" routerLinkActive="router-link-active">
