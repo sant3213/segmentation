@@ -5,9 +5,14 @@
 export const environment = {
   production: false,
   segmentApi: 'http://localhost:3200/',
-  helpGuidance: 'Debes ingresar cada dígito con su correspondiente unidad. Ejemplo: para 1 kilobyte digitar 1k,'+
+  helpGuidance: 'Este programa permite hacer una simulación de dos segmentos: El segmento 0 correspondiente al código y heap y'+
+  ' el segmento 1 correspondiente al stack, el cual crece de forma inversa al segmento 0 (de abajo hacia arriba). '
+  +'Tiene dos opciones de uso. El primero es dejar que el programa envíe parámetros por defecto o ingresar los propios valores al programa.'+
+  'Los valores por defecto son: Espacio de direccionamiento lógico: 1k. Tamaño de memoria física: 16k \n Número de direcciones virtuales a generar: 5. '+
+  'Para los valores límites y base del segmento 0 y 1 se generan aleatoriamente.'
+  +'Para ingresar el tamaño tanto de la dirección física como de la virtual deberá especificar sus unidades. Ejemplo: para 1 kilobyte digitar 1k,'+
                 'para 1 Megabyte digitar 1M y para 1 Gigabyte digitar 1G. Para digitar las direcciones, cada una debe ir seguida de una ",".'+
-                'Ejemplo: 23K, 30K, 50K. Para el límite hay dos opciones: límite del segmento 0 y límite del segmento 1.'
+                'Ejemplo: 23, 30, 50.'
 };
 
 /*

@@ -29,6 +29,7 @@ export class GraphicResultsComponent implements OnInit {
   base1Value: String;
   len0Value: string;
   len1Value: string;
+  isHexa=false;
 
   /**
    * Options to select if decimal system or hexadecimal system
@@ -89,6 +90,7 @@ export class GraphicResultsComponent implements OnInit {
   setBase0Variable(event) {
     switch (event.value) {
       case 'Decimal': {
+        this.isHexa = false;
         this.base0Value = this.base0Object.decimal;
         this.base1Value = this.base1Object.decimal;
         this.len0Value = this.info.len0;
@@ -96,6 +98,7 @@ export class GraphicResultsComponent implements OnInit {
         break;
       }
       case 'Hexadecimal': {
+        this.isHexa = true;
         this.base0Value = this.base0Object.hexa;
         this.base1Value = this.base1Object.hexa;
         this.len0Value = this.info.len0Hexa;

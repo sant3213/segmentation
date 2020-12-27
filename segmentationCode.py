@@ -172,8 +172,8 @@ def exec_segmentation(res):
                 if paddr < base1:
                     addressTrace.hexa= '0x%08x' % (vaddr)
                     addressTrace.decimal= '%4d' % (vaddr)
-                    addressTrace.hexaValid = 'VIOLATION (SEG1)' 
-                    addressTrace.decimalValid = 'VIOLATION (SEG1)'
+                    addressTrace.hexaValid = 'VIOLACIÓN EN SEGMENTO 1'
+                    addressTrace.decimalValid = 'VIOLACIÓN EN SEGMENTO 1'
                     addressTraceList.append(addressTrace)
                     addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG1)' % (i, vaddr, vaddr))
@@ -192,8 +192,8 @@ def exec_segmentation(res):
                    # addressTrace.append('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG0)' % (i, vaddr, vaddr))
                     addressTrace.hexa= '0x%08x' % (vaddr)
                     addressTrace.decimal= '%4d' % (vaddr)
-                    addressTrace.hexaValid = 'VIOLATION (SEG0)' 
-                    addressTrace.decimalValid = 'VIOLATION (SEG0)'
+                    addressTrace.hexaValid = 'VIOLACIÓN EN SEGMENTO 0'
+                    addressTrace.decimalValid = 'VIOLACIÓN EN SEGMENTO 0'
                     addressTraceList.append(addressTrace)
                     addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG0)' % (i, vaddr, vaddr))

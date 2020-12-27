@@ -47,10 +47,16 @@
             <th scope="col" class="general-label"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="!isHexa">
           <tr *ngFor="let data of addressesList">
             <td>{{data.decimal}}</td>
             <td>{{data.decimalValid}}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="isHexa">
+          <tr *ngFor="let data of addressesList">
+            <td>{{data.hexa}}</td>
+            <td>{{data.hexaValid}}</td>
           </tr>
         </tbody>
       </table>

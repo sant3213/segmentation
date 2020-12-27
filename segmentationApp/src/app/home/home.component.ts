@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
       len1: '-1',
       base0: '-1',
       base1: '-1',
-      numaddrs: 0,
+      numaddrs: 5,
     });
 
     this.segmentService.sendParams(this.paramsForm).subscribe((data) => {
