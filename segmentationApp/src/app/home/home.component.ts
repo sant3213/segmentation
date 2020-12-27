@@ -24,6 +24,7 @@ export interface DialogData {
 export class HomeComponent implements OnInit {
 
   paramsForm: FormGroup;
+  seedForm: FormGroup;
   params: any;
   isInputParam: Boolean = false;
   base0Object: Base0;
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
   addressesList = [];
   closeResult = '';
   error: string;
+  seed=0;
   helpGuidance= environment.helpGuidance;
 
   constructor(private fb: FormBuilder,
@@ -50,6 +52,9 @@ export class HomeComponent implements OnInit {
       base1: ['', Validators.required],
       numaddrs: [0, Validators.required]
     });
+    this.seedForm = this.fb.group({
+      seed:[0, Validators.required]
+    })
   }
 
   sendParams(information: UserParameters) {
@@ -80,8 +85,9 @@ export class HomeComponent implements OnInit {
 
   setDefaultValues() {
     this.isInputParam = false;
+    this.seed = this.seedForm.get('seed').value;
     this.paramsForm.patchValue({
-      seed: 0,
+      seed: this.seed,
       asize: '1k',
       psize: '16k',
       address: '-1',

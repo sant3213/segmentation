@@ -46,7 +46,7 @@ def exec_segmentation(res):
            # exit(1)
         return
 
-    random_seed(0)
+    random_seed(res.get('seed'))
     
     asize = convert(res.get('asize'))
     psize = convert(res.get('psize'))

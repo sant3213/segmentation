@@ -37,7 +37,7 @@ export class FormComponent implements OnInit {
   sendData(){
     this.paramsInformation.emit(this.paramsForm.value);
   }
-
+/*
   sendParams(){
     this.setParamsValues();
     this.service.sendParams(this.paramsForm).subscribe(
@@ -61,7 +61,7 @@ export class FormComponent implements OnInit {
       numaddrs: this.paramsForm.get('numaddrs').value
     });
 }
-
+*/
 resetValues(){
   this.paramsForm.reset()
 }

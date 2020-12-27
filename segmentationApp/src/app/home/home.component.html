@@ -1,6 +1,7 @@
 
 <div class="col-sm">
     <mat-card class="mat-card-params">
+        <form [formGroup]="seedForm">
         <div class="row">
             <div class="col-md-4">
                 <button class="btn btn-light new" (click)="setDefaultValues()">
@@ -17,6 +18,18 @@
                 <button type="button" class="btn btn-primary" (click)="showHelpInformation()">Ayuda </button>
             </div>
         </div>
+        
+            <div class="seedInput col-md-2">
+                <label for="inputName">Cambiar valores aleatorios</label>
+                <input type="number" formControlName="seed" class="form-control" placeholder="1">
+                <span class="invalid-feedback">
+                    <span *ngIf="paramsForm.get('seed').errors?.required">
+                        Por favor ingrese el seed
+                    </span>
+                </span>
+            
+        </div>
+    </form>
     </mat-card>
 </div>
 <app-form *ngIf="isInputParam" (paramsInformation)="sendParams($event)"></app-form>
