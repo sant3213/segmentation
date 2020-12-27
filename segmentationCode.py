@@ -115,8 +115,8 @@ def exec_segmentation(res):
     abort_if(psize < base0 + len0 - 1, 'Segmento 0 no está en la memoria física')
     abort_if(psize < base1, 'Segmento 1 no está en la memoria física')
         
-    abort_if(len0 > asize/2.0, 'El registro de length0 es muy grande para este espacio de direccionamiento')
-    abort_if(len1 > asize/2.0, 'El registro de length1 es muy grande para este espacio de direccionamiento')
+    abort_if(len0 > asize/2.0, 'El registro del tamaño de dirección virtual del segmento 0 es muy grande para este espacio de direccionamiento')
+    abort_if(len1 > asize/2.0, 'El registro del tamaño de dirección virtual del segmento 1 es muy grande para este espacio de direccionamiento')
 
     print('Segment register information:')
     print('')
@@ -125,6 +125,7 @@ def exec_segmentation(res):
     base0Object.isPositive='1'
     print('  Segment 0 base  (grows positive) : 0x%08x (decimal %d)' % (base0, base0))
     result.len0='%d' % (len0)
+    result.len0Hexa='0x%08x' % (len0)
     print('  Segment 0 limit                  : %d and hexa: 0x%08x' % (len0, len0))
     print('')
     base1Object.hexa='0x%08x' % (base1+len1)
@@ -132,6 +133,7 @@ def exec_segmentation(res):
     base1Object.isPositive='0'
     print('  Segment 1 base  (grows negative) : 0x%08x (decimal %d)' % (base1+len1, base1+len1))
     result.len1='%d' % (len1)
+    result.len1Hexa='0x%08x' % (len1)
     print('  Segment 1 limit                  : %d' % (len1))
     print('')
 

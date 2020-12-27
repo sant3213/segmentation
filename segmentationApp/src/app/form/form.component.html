@@ -15,7 +15,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputName">Memoria lógica</label>
+                                <label for="inputName">Tamaño Memoria lógica</label>
                                 <input type="text" formControlName="asize" class="form-control"
                                     placeholder="Memoria lógica">
                                 <span class="invalid-feedback">
@@ -25,7 +25,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputName">Memoria física</label>
+                                <label for="inputName">Tamaño Memoria física</label>
                                 <input type="text" formControlName="psize" class="form-control"
                                     placeholder="Memoria física">
                                 <span class="invalid-feedback">
@@ -35,10 +35,10 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputName">Registro base de la memoria física</label>
-                                <input type="text" formControlName="base1" class="form-control" placeholder="">
+                                <label for="inputName">Registro base del segmento 0</label>
+                                <input type="text" formControlName="base0" class="form-control" placeholder="">
                                 <span class="invalid-feedback">
-                                    <span *ngIf="paramsForm.get('base1').errors?.required">
+                                    <span *ngIf="paramsForm.get('base0').errors?.required">
                                         Por favor ingrese un registro
                                     </span>
                                 </span>
@@ -62,10 +62,10 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputName">Registro base de la dirección virtual</label>
-                                <input type="text" formControlName="base0" class="form-control" placeholder="Seed">
+                                <label for="inputName">Registro base del segmento 1</label>
+                                <input type="text" formControlName="base1" class="form-control" placeholder="">
                                 <span class="invalid-feedback">
-                                    <span *ngIf="paramsForm.get('base0').errors?.required">
+                                    <span *ngIf="paramsForm.get('base1').errors?.required">
                                         Por favor ingrese un registro
                                     </span>
                                 </span>
@@ -73,7 +73,7 @@
                             <div class="form-group col-md-6">
                                 <label for="inputName">Direcciones</label>
                                 <input type="text" formControlName="address" class="form-control"
-                                    placeholder="Memoria física">
+                                    placeholder="20, 1023">
                                 <span class="invalid-feedback">
                                     <span *ngIf="paramsForm.get('address').errors?.required">
                                         Por favor ingrese el tamaño de memoria física

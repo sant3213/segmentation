@@ -9,6 +9,8 @@ class Data(Schema):
     address = fields.Str()
     len0 = fields.Str()
     len1 = fields.Str()
+    len0Hexa = fields.Str()
+    len1Hexa = fields.Str()
     base0 = fields.Nested("Base0")
     base1 = fields.Nested("Base1")
     numaddrs = fields.Str()

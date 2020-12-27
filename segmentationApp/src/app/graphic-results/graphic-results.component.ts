@@ -98,8 +98,8 @@ export class GraphicResultsComponent implements OnInit {
       case 'Hexadecimal': {
         this.base0Value = this.base0Object.hexa;
         this.base1Value = this.base1Object.hexa;
-        this.len0Value = Number(this.info.len0).toString(16);
-        this.len1Value = Number(this.info.len1).toString(16);
+        this.len0Value = this.info.len0Hexa;
+        this.len1Value = this.info.len1Hexa;
         break;
       }
     }
