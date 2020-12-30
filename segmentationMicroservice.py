@@ -20,7 +20,6 @@ PORT = 3200
 
 @app.route("/segmentation",  methods=["POST"])
 def qs():
-    print(request.data)
     params = json.loads(request.data)
     schema = Data()
     res = segment.exec_segmentation(params)

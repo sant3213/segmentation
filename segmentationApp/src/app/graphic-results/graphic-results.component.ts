@@ -56,8 +56,8 @@ export class GraphicResultsComponent implements OnInit {
       this.setAddresses(this.info.virtualAddressTrace);
       this.base0Value = this.base0Object.decimal;
       this.base1Value = this.base1Object.decimal;
-      this.len0Value = this.info.len0;
-      this.len1Value = this.info.len1;
+      this.len0Value = (Number(this.base0Object.decimal)+Number(this.info.len0)).toString();
+      this.len1Value = (Number(this.base1Object.decimal)-Number(this.info.len1)).toString();
     });
   }
 

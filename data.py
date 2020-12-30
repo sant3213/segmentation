@@ -16,7 +16,6 @@ class Data(Schema):
     numaddrs = fields.Str()
     virtualAddressTrace = fields.List(fields.Nested("Addressess"))
 
-
 class Addressess(Schema):
     hexa = fields.Str()
     decimal = fields.Str()

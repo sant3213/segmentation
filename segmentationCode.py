@@ -76,6 +76,8 @@ def exec_segmentation(res):
     len1 = convert(res.get('len1'))
     base0 = convert(res.get('base0'))
     base1 = convert(res.get('base1'))
+    addresses = res.get('address')
+
     '''
     len0 = convert("-1")
     len1 = convert("-1")
@@ -144,7 +146,7 @@ def exec_segmentation(res):
     addrList = []
     if addresses == '-1':
         # need to generate addresses
-        for i in range(0, 5): # Agregar num como numaddrs representada como -n como parámetro defecto 5 
+        for i in range(0, res.get('numaddrs')): # Agregar num como numaddrs representada como -n como parámetro defecto 5 
             n = int(asize * random.random())
             addrList.append(n)
     else:
@@ -198,6 +200,7 @@ def exec_segmentation(res):
                     addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG0)' % (i, vaddr, vaddr))
                 else:
+                    paddr = vaddr + base0
                     addressTrace.hexa = '0x%08x' % (vaddr)
                     addressTrace.decimal = '%4d' % (vaddr)
                     addressTrace.hexaValid = '0x%08x '% (paddr)
