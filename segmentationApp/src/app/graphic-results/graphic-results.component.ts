@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Addressess } from '../model/Addressess';
 import { Base0 } from '../model/Base0';
 import { Base1 } from '../model/Base1';
+import { UserParameters } from '../model/UserParameters';
 
 interface Base0Section {
   selection: string;
@@ -30,6 +31,7 @@ export class GraphicResultsComponent implements OnInit {
   len0Value: string;
   len1Value: string;
   isHexa=false;
+  userParameters:UserParameters;
 
   /**
    * Options to select if decimal system or hexadecimal system
@@ -93,18 +95,38 @@ export class GraphicResultsComponent implements OnInit {
         this.isHexa = false;
         this.base0Value = this.base0Object.decimal;
         this.base1Value = this.base1Object.decimal;
-        this.len0Value = this.info.len0;
-        this.len1Value = this.info.len1;
+        this.len0Value = (Number(this.base0Object.decimal)+Number(this.info.len0)).toString();
+        this.len1Value = (Number(this.base1Object.decimal)-Number(this.info.len1)).toString();
         break;
       }
       case 'Hexadecimal': {
         this.isHexa = true;
         this.base0Value = this.base0Object.hexa;
         this.base1Value = this.base1Object.hexa;
-        this.len0Value = this.info.len0Hexa;
-        this.len1Value = this.info.len1Hexa;
+        
+        this.len0Value = this.concatNumberToHexa((Number(this.base0Object.hexa)+Number(this.info.len0Hexa)).toString(16));
+        this.len1Value = this.concatNumberToHexa((Number(this.base1Object.hexa)-Number(this.info.len1Hexa)).toString(16));
         break;
       }
     }
+  }
+/**
+ * 
+ * @param number 
+ * Convert to hexadecimal the limits either the seg0 or the seg1
+ */
+  concatNumberToHexa(number: string){
+    var lengthNumber = number.length;
+    var cerosToConcat = 8-lengthNumber;
+    var ceros="0";
+    var symbol = "0x";
+    for(var i = 0; i < cerosToConcat-1; i++){
+     
+      ceros+="0";
+    }
+    var a = symbol.concat(ceros);
+    var result = a.concat(number)
+    return result;
+    
   }
 }
