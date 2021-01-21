@@ -1,5 +1,5 @@
 export class UserParameters {
-    seed: string;
+    seed?: string;
     asize?: string;
     psize?: string;
     address?: string;

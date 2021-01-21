@@ -162,7 +162,6 @@ def exec_segmentation(res):
         if vaddr < 0 or vaddr >= asize:
             result.error = 'La dirección virtual %d no puede ser generada en un espacio de direccionamiento de tamaño %d' % (vaddr, asize) 
             print('Error: virtual address %d cannot be generated in an address space of size %d' % (vaddr, asize))
-            exit(1)
         if True == False: # Agregar solve parámetro "-c"
             print('  VA %2d: 0x%08x (decimal: %4d) --> PA or segmentation violation?' % (i, vaddr, vaddr))
         else:

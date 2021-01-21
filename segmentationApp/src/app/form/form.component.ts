@@ -22,7 +22,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.paramsForm = this.fb.group({
-      seed: [0, Validators.required],
+      seed: [0],
       asize: ['', Validators.required],
       psize: ['', Validators.required],
       address: ['', Validators.required],
