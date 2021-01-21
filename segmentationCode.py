@@ -175,6 +175,7 @@ def exec_segmentation(res):
                     addressTrace.decimal= '%4d' % (vaddr)
                     addressTrace.hexaValid = 'VIOLACIÓN EN SEGMENTO 1'
                     addressTrace.decimalValid = 'VIOLACIÓN EN SEGMENTO 1'
+                    addressTrace.segment = 'Segmento 1'
                     addressTraceList.append(addressTrace)
                     addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG1)' % (i, vaddr, vaddr))
@@ -184,6 +185,7 @@ def exec_segmentation(res):
                     addressTrace.decimal = '%4d' % (vaddr)
                     addressTrace.hexaValid = '0x%08x'% (paddr)
                     addressTrace.decimalValid = '%4d'% (paddr)
+                    addressTrace.segment = 'Segmento 1'
                     addressTraceList.append(addressTrace)
                     addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> VALID in SEG1: 0x%08x (decimal: %4d)' % (i, vaddr, vaddr, paddr, paddr))
@@ -195,6 +197,7 @@ def exec_segmentation(res):
                     addressTrace.decimal= '%4d' % (vaddr)
                     addressTrace.hexaValid = 'VIOLACIÓN EN SEGMENTO 0'
                     addressTrace.decimalValid = 'VIOLACIÓN EN SEGMENTO 0'
+                    addressTrace.segment = 'Segmento 0'
                     addressTraceList.append(addressTrace)
                     addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> SEGMENTATION VIOLATION (SEG0)' % (i, vaddr, vaddr))
@@ -204,6 +207,7 @@ def exec_segmentation(res):
                     addressTrace.decimal = '%4d' % (vaddr)
                     addressTrace.hexaValid = '0x%08x '% (paddr)
                     addressTrace.decimalValid = '%4d'% (paddr)
+                    addressTrace.segment = 'Segmento 0'
                     addressTraceList.append(addressTrace)
                     addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> VALID in SEG0: 0x%08x (decimal: %4d)' % (i, vaddr, vaddr, paddr, paddr))

@@ -21,6 +21,7 @@ class Addressess(Schema):
     decimal = fields.Str()
     hexaValid = fields.Str()
     decimalValid = fields.Str()
+    segment = fields.Str()
 
 class Base0(Schema):
     hexa = fields.Str()

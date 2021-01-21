@@ -53,7 +53,6 @@ export class GraphicResultsComponent implements OnInit {
   ngOnInit(): void {
     this.router.queryParams.subscribe((params) => {
       this.info = JSON.parse(params.info)
-      console.log(this.info)
       this.setValues(this.info.base0, this.info.base1);
       this.setAddresses(this.info.virtualAddressTrace);
       this.base0Value = this.base0Object.decimal;
