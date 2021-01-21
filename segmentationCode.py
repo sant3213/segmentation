@@ -207,7 +207,7 @@ def exec_segmentation(res):
                     addressTrace.decimal = '%4d' % (vaddr)
                     addressTrace.hexaValid = '0x%08x '% (paddr)
                     addressTrace.decimalValid = '%4d'% (paddr)
-                    addressTrace.segment = 'Segmento 0'
+                    addressTrace.segment = 'Segmento 1'
                     addressTraceList.append(addressTrace)
                     addressTrace = Addressess()
                     print('  VA %2d: 0x%08x (decimal: %4d) --> VALID in SEG0: 0x%08x (decimal: %4d)' % (i, vaddr, vaddr, paddr, paddr))

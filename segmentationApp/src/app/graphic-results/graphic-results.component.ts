@@ -53,12 +53,13 @@ export class GraphicResultsComponent implements OnInit {
   ngOnInit(): void {
     this.router.queryParams.subscribe((params) => {
       this.info = JSON.parse(params.info)
+      console.log(this.info)
       this.setValues(this.info.base0, this.info.base1);
       this.setAddresses(this.info.virtualAddressTrace);
       this.base0Value = this.base0Object.decimal;
       this.base1Value = this.base1Object.decimal;
       this.len0Value = (Number(this.base0Object.decimal)+Number(this.info.len0)).toString();
-      this.len1Value = (Number(this.base1Object.decimal)-Number(this.info.len1)).toString();
+      this.len1Value = (/*Number(this.base1Object.decimal)-*/Number(this.info.len1)).toString();
     });
   }
 
@@ -95,7 +96,7 @@ export class GraphicResultsComponent implements OnInit {
         this.base0Value = this.base0Object.decimal;
         this.base1Value = this.base1Object.decimal;
         this.len0Value = (Number(this.base0Object.decimal)+Number(this.info.len0)).toString();
-        this.len1Value = (Number(this.base1Object.decimal)-Number(this.info.len1)).toString();
+        this.len1Value = (/*Number(this.base1Object.decimal)-*/Number(this.info.len1)).toString();
         break;
       }
       case 'Hexadecimal': {
@@ -104,7 +105,7 @@ export class GraphicResultsComponent implements OnInit {
         this.base1Value = this.base1Object.hexa;
         
         this.len0Value = this.concatNumberToHexa((Number(this.base0Object.hexa)+Number(this.info.len0Hexa)).toString(16));
-        this.len1Value = this.concatNumberToHexa((Number(this.base1Object.hexa)-Number(this.info.len1Hexa)).toString(16));
+        this.len1Value = this.concatNumberToHexa((/*Number(this.base1Object.hexa)-*/Number(this.info.len1Hexa)).toString(16));
         break;
       }
     }
